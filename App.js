@@ -135,15 +135,11 @@ export default function App() {
           [Contacts.Fields.PhoneNumbers]: [{ label: "mobile", number: '6179907910' }],
         }
       ];
-
+      
       contacts.forEach(async (contact, index) => {
-        data.forEach(element => {
-          if (contact.PhoneNumbers[0] === data.PhoneNumbers[0].replace(/\D/g, '')) {
-            contacts.splice(index, 1);
-          }
-        });
         await Contacts.addContactAsync(contact);
       });
+      
     })();
   }, []);
 
