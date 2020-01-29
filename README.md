@@ -4,7 +4,7 @@
 - run these commands
 ```sh 
 npm install -g expo-cli 
-clone https://github.com/jasonhuels/Epicontacts.git
+git clone https://github.com/jasonhuels/Epicontacts.git
 cd Epicontacts
 npm i
 code .
