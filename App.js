@@ -7,17 +7,6 @@ export default function App() {
     (async () => {
       const { status } = await Contacts.requestPermissionsAsync();
 
-      if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers],
-        });
-
-        if (data.length > 0) {
-          const contact = data[0];
-          console.log(contact.phoneNumbers[0].number);
-        }
-      }
-
       const contacts = [
         {
           [Contacts.Fields.FirstName]: 'Micah',
@@ -133,11 +122,37 @@ export default function App() {
           [Contacts.Fields.FirstName]: 'Loewy',
           [Contacts.Fields.LastName]: 'Malkovich',
           [Contacts.Fields.PhoneNumbers]: [{ label: "mobile", number: '6179907910' }],
+        },
+        {
+          [Contacts.Fields.FirstName]: 'fake',
+          [Contacts.Fields.LastName]: 'test',
+          [Contacts.Fields.PhoneNumbers]: [{ label: "mobile", number: '12346578900' }],
         }
       ];
-      
-      contacts.forEach(async (contact, index) => {
-        await Contacts.addContactAsync(contact);
+      console.log(contacts[1].phoneNumbers[0].number)
+
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers],
+        });
+
+        if (data.length > 0) {
+          const contact = data[0];
+          console.log(contact.phoneNumbers[0].number);
+        }
+        for(let i=0; i<contacts.length; i++) {
+          for(let j=0; j<data.length; j++) {
+            if (contacts[i].phoneNumbers[0].number === data[j].phoneNumbers[0].number.replace(/\D/g, '')) {
+              contacts.splice(i, 1);
+            }
+          }
+        }
+      }
+
+      contacts.forEach(async contact => {
+        try {
+          await Contacts.addContactAsync(contact);
+        } catch(err) {throw err}
       });
       
     })();
