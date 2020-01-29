@@ -122,26 +122,16 @@ export default function App() {
           [Contacts.Fields.FirstName]: 'Loewy',
           [Contacts.Fields.LastName]: 'Malkovich',
           [Contacts.Fields.PhoneNumbers]: [{ label: "mobile", number: '6179907910' }],
-        },
-        {
-          [Contacts.Fields.FirstName]: 'fake',
-          [Contacts.Fields.LastName]: 'test',
-          [Contacts.Fields.PhoneNumbers]: [{ label: "mobile", number: '12346578900' }],
         }
       ];
-      console.log(contacts[1].phoneNumbers[0].number)
 
       if (status === 'granted') {
         const { data } = await Contacts.getContactsAsync({
           fields: [Contacts.Fields.PhoneNumbers],
         });
 
-        if (data.length > 0) {
-          const contact = data[0];
-          console.log(contact.phoneNumbers[0].number);
-        }
         //Duplicate checker not working
-        
+
         // for(let i=0; i<contacts.length; i++) {
         //   for(let j=0; j<data.length; j++) {
         //     if (contacts[i].phoneNumbers[0].number === data[j].phoneNumbers[0].number.replace(/\D/g, '')) {
@@ -168,7 +158,7 @@ export default function App() {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text>Contacts Module Example</Text>
+      <Text>Check your contacts</Text>
     </View>
   );
 }
