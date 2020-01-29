@@ -140,13 +140,15 @@ export default function App() {
           const contact = data[0];
           console.log(contact.phoneNumbers[0].number);
         }
-        for(let i=0; i<contacts.length; i++) {
-          for(let j=0; j<data.length; j++) {
-            if (contacts[i].phoneNumbers[0].number === data[j].phoneNumbers[0].number.replace(/\D/g, '')) {
-              contacts.splice(i, 1);
-            }
-          }
-        }
+        //Duplicate checker not working
+        
+        // for(let i=0; i<contacts.length; i++) {
+        //   for(let j=0; j<data.length; j++) {
+        //     if (contacts[i].phoneNumbers[0].number === data[j].phoneNumbers[0].number.replace(/\D/g, '')) {
+        //       contacts.splice(i, 1);
+        //     }
+        //   }
+        // }
       }
 
       contacts.forEach(async contact => {
